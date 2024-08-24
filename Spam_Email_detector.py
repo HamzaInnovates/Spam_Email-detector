@@ -15,15 +15,14 @@ for train_index, test_index in split.split(df,df["label"]):
     train=df.loc[train_index]
     test=df.loc[test_index]
     
-#creating object of count vectorizer and transforming the input data
+#creating object of count vectorizer 
 cv= CountVectorizer()
 X_train = cv.fit_transform(train['text'])  
 X_test = cv.transform(test['text'])
-
 Y_train = train['label']
 Y_test = test['label']
 
-#training models
+#training model
 clf1 = MultinomialNB()
 clf1.fit(X_train, Y_train)
 
@@ -42,10 +41,8 @@ def rmse(mse):
 #mean
 mse1 = mean_squared_error(Y_test, pred_1)
 
-
 #Calculating and printing root mean_squared_error
 rmse1 = rmse(mse1)
-
 print(f"RMSE for MultinomialNB : {rmse1}")
 
 X = cv.fit_transform(df['text'].astype(str)) 
@@ -69,8 +66,6 @@ plt.show()
 #test email
 
 # email = [""]
-
-
 # email = cv.transform(email)
 
 # predictions = clf1.predict(email) 
